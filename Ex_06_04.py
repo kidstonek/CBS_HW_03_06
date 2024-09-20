@@ -39,15 +39,12 @@ class MyIterator:
             raise StopIteration
 
         result = (list(self.obj.keys())[self.current_index], self.obj[list(self.obj.keys())[self.current_index]][self.current_position])
-        print(self.current_position)
         if self.current_position  < len(self.obj[list(self.obj.keys())[self.current_index]]):
-            if self.current_index < len(list(self.obj.keys())):
-                self.current_index += 1
+            self.current_position += 1
+            if self.current_position == len(self.obj[list(self.obj.keys())[self.current_index]]):
                 self.current_position = 0
-            else:
-                self.current_position += 1
-                self.current_index += 1
-        print(self.current_position, 'rrr')
+                if self.current_index < len(list(self.obj.keys())):
+                    self.current_index += 1
         return result
 
 
@@ -59,8 +56,5 @@ if '__main__' == __name__:
         "Книги": ["Роман", "Фентезі", "Наукова література"]
     }
 
-    for char in MyIterator(products):
-        print(char)
-
-# print((list(products.keys())[0]))
-# print(len(products["Електроніка"]))
+    for product in MyIterator(products):
+        print(product)
