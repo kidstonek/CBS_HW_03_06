@@ -25,6 +25,7 @@ products = {
 
 """
 
+
 class MyIterator:
     def __init__(self, obj: dict):
         self.obj = obj
@@ -39,7 +40,7 @@ class MyIterator:
             raise StopIteration
 
         result = (list(self.obj.keys())[self.current_index], self.obj[list(self.obj.keys())[self.current_index]][self.current_position])
-        if self.current_position  < len(self.obj[list(self.obj.keys())[self.current_index]]):
+        if self.current_position < len(self.obj[list(self.obj.keys())[self.current_index]]):
             self.current_position += 1
             if self.current_position == len(self.obj[list(self.obj.keys())[self.current_index]]):
                 self.current_position = 0
