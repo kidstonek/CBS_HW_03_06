@@ -1,24 +1,24 @@
 class Book:
     def __init__(self):
-        self.__whole_books = []
+        self._whole_books = []
 
     def add_books(self, new_book: str):
         self.__book = new_book
-        if self.__book not in self.__whole_books:
-            self.__whole_books.append(self.__book)
+        if self.__book not in self._whole_books:
+            self._whole_books.append(self.__book)
 
     def __str__(self):
-        return ', '.join(self.__whole_books)
+        return ', '.join(self._whole_books)
 
     def __iter__(self):
         self.current_index = 0
         return self
 
     def __next__(self):
-        if self.current_index == len(self.__whole_books):
+        if self.current_index == len(self._whole_books):
             raise StopIteration
 
-        result = self.__whole_books[self.current_index]
+        result = self._whole_books[self.current_index]
         self.current_index += 1
         return result
 
@@ -39,32 +39,57 @@ class Author:
         return self
 
     def __next__(self):
-        if self.current_index == len(self.__whole_books):
+        if self.current_index == len(self._authors_books._whole_books):
             raise StopIteration
 
-        result = self.__whole_books[self.current_index]
+        result = self._authors_books._whole_books[self.current_index]
         self.current_index += 1
         return result
 
 
-my_book = Book()
+class Library:
+    def __init__(self):
+        self._content = {}
 
-my_book.add_books('1')
-my_book.add_books('3')
-my_book.add_books('5')
-my_book.add_books('3')
+    def add_items_to_library(self, author: Author):
+        self._content[author._author_name] = author._authors_books
 
-ath1 = Author('Oleg')
-ath1.add_books(my_book)
+    def __iter__(self):
+        self.current_index = 0
+        return self
 
-my_book2 = Book()
+    def __next__(self):
+        if self.current_index == len(self._content):
+            raise StopIteration
 
-my_book2.add_books('qwe')
-my_book2.add_books('rty')
-my_book2.add_books('678')
+        my_author = list(self._content.keys())[self.current_index]
+        my_author_books = ', '.join(self._content[my_author])
+        self.current_index += 1
+        return f'author {my_author} with books: {my_author_books}'
 
-ath2 = Author('Igor')
-ath2.add_books(my_book2)
 
-print(ath1, ath2)
+if __name__ == "__main__":
+    my_book = Book()
+
+    my_book.add_books('author_1')
+    my_book.add_books('author_3')
+    my_book.add_books('author_5')
+    my_book.add_books('author_3')
+
+    ath1 = Author('Oleg')
+    ath1.add_books(my_book)
+
+    my_book2 = Book()
+
+    my_book2.add_books('some_1')
+    my_book2.add_books('some_2')
+    my_book2.add_books('some_3')
+
+    ath2 = Author('Igor')
+    ath2.add_books(my_book2)
+
+    lib = Library()
+    lib.add_items_to_library(ath1)
+    lib.add_items_to_library(ath2)
+
 
