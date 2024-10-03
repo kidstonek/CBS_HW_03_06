@@ -94,47 +94,33 @@ class Library:
 
 
 if __name__ == "__main__":
-    my_book = Book()
-
-    my_book.add_books('author_1')
-    my_book.add_books('author_3')
-    my_book.add_books('author_5')
-    my_book.add_books('author_3')
-
-    ath1 = Author('Oleg')
-    ath1.add_books(my_book)
-
-    my_book2 = Book()
-
-    my_book2.add_books('some_1')
-    my_book2.add_books('some_2')
-    my_book2.add_books('some_3')
-
-    ath2 = Author('Igor')
-    ath2.add_books(my_book2)
 
     lib = Library()
-    # lib.add_items_to_library(ath1)
-    # lib.add_items_to_library(ath2)
 
 
-def show_library(info: Library):   # for i in lib:
+def show_library(info: Library):
     for item in info:
         print(item)
 
 
 while True:
-    print("choose what to do:\n1) Show library:\n2) Add element to library\n3) Show all Books\n4) Show all Authors")
+    print("choose what to do:\n1) Show library:\n2) Add element to library\n Other for exit")
     option = input('choose options: ')
     if option == '1':
         print()
         show_library(lib)
     elif option == '2':
-        pass
-    elif option == '3':
-        pass
-    elif option == '4':
-        pass
+        print()
+        usr_input = input('Please provide the author name: ')
+        tmp_ath = Author(usr_input)
+        print()
+        usr_input = int(input('Please provide number of books for this author: '))
+        tmp_book = Book()
+        for i in range(usr_input):
+            tmp_book_name = input('Please provide the author`s book: ')
+            tmp_book.add_books(tmp_book_name)
+        tmp_ath.add_books(tmp_book)
+        lib.add_items_to_library(tmp_ath)
     else:
         print('end!')
         break
